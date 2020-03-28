@@ -1,16 +1,24 @@
 const  express = require('express');
+const crypto = require('crypto');
+const connection = require('./database/connection');
+
 const routes = express.Router();
 
-routes.post('/users', (request, response)=> {
-    const body = request.body;
+routes.post('/microbank', async (request, response)=> {
+    const { name, email, whatsapp, city, uf } = request.body;
 
-    console.log(body);
-    
-    return response.json({
-        comprimento: "Fala cumpade!",
-        respota:"De boas",
-        Lombra: "E que lombra!",
+    const id = crypto.randomBytes(4).toString('HEX');
+
+    await connection('microbank').insert({
+        id,
+        name,
+        email,
+        whatsapp,
+        city,
+        uf,
     });
+    
+    return response.json({ id });
 
 });
 
