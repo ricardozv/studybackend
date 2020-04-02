@@ -1,4 +1,5 @@
 // Update with your config settings.
+// Commit para dizer que esse repositório será descontinuado, mudança no estudo, banco de dados.
 
 module.exports = {
 
